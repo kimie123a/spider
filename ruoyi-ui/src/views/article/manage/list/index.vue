@@ -33,21 +33,25 @@
 
         </template>
       </el-table-column>
-      <pagination
-        v-show="total>0"
-        :total="total"
-        :page.sync="article.pageNum"
-        :limit.sync="article.pageSize"
-        @pagination="articleList"
-      />
     </el-table>
+
+<!--    分页处理-->
+    <pagination
+      v-show="total>0"
+      :total="total"
+      :page.sync="queryParams.pageNum"
+      :limit.sync="queryParams.pageSize"
+      @pagination="articleList"
+    />
   </div>
+
 </template>
 
 <script>
 import {getarticleList} from "@/api/system/article";
 import Treeselect from "@riophae/vue-treeselect";
 import "@riophae/vue-treeselect/dist/vue-treeselect.css";
+import {listUser} from "@/api/system/user";
 
 
 export default {
@@ -65,25 +69,25 @@ export default {
       queryParams: {
         pageNum: 1,
         pageSize: 10,
-        userName: undefined,
-        phonenumber: undefined,
-        status: undefined,
-        deptId: undefined
+        articleId: '',
+        artTitle: ''
       },
     }
   },
-  mounted() {
+  created() {
     this.articleList();
   },
   methods: {
     articleList(){
+      this.loading = true;
       // 获取文章数据
-      getarticleList(this.queryParams).then(response => {
-        console.log('response',response)
-        this.article = response.rows;
-        this.total = response.total;
-        this.loading = false;
-      });
+      this.loading = true;
+      getarticleList(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+          this.article = response.rows;
+          this.total = response.total;
+          this.loading = false;
+        }
+      );
     },
     handleSelectionChange(){},
     handleEdit(index, row) {

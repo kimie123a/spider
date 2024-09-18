@@ -6,7 +6,8 @@ import request from "@/utils/request";
 export function getarticleList(query) {
   return request({
     url: '/article/manage/list',
-    method: 'get'
+    method: 'get',
+    params: query
   })
 }
 
