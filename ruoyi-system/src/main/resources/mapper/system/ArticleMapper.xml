@@ -19,6 +19,7 @@
 
     <select id="selectArticleList" resultMap="ArticleResult">
         select art_id,art_title,art_description,art_content,status,del_flag,create_time,update_time from article
+        where del_flag = '0'
     </select>
 
     <select id="selectArticle" parameterType="Article" resultMap="ArticleResult">
@@ -49,6 +50,18 @@
         <if test="updateTime != null">#{updateTime}</if>
         )
     </insert>
+
+    <delete id="deleteArticleById" parameterType="Long">
+        update article set del_flag = '1' where art_id = #{articleId}
+    </delete>
+
+    <delete id="deleteArticleByIds" parameterType="Long">
+        update article set del_flag = '1' where art_id in
+        <foreach collection="array" item="articleId" open="(" separator="," close=")">
+            #{articleId}
+        </foreach>
+    </delete>
+
 
 
 

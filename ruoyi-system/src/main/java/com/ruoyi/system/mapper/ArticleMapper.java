@@ -12,6 +12,9 @@ public interface ArticleMapper {
 
     public int insertArticle(Article article);
 
+    public int deleteArticleById(Long articleId);
+
+    public int deleteArticleByIds(Long[] articleIds);
 
 
 }

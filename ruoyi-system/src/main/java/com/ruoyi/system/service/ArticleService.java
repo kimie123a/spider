@@ -18,4 +18,19 @@ public interface ArticleService {
     public int insertArticle(Article article);
 
 
+    /**
+     * 通过用户ID删除文章
+     *
+     * @param articleId 用户ID
+     * @return 结果
+     */
+    public int deleteArticleById(Long articleId);
+
+    /**
+     * 通过用户ID批量删除文章
+     *
+     * @param articleIds 用户ID
+     * @return 结果
+     */
+    public int deleteArticleByIds(Long[] articleIds);
 }

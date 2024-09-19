@@ -29,7 +29,7 @@ public class Article extends BaseEntity {
     @Excel(name = "文章状态", readConverterExp = "0=正常,1=停用")
     private String status;
 
-    /** 删除标志（0代表存在 2代表删除） */
+    /** 删除标志（0代表存在 1代表删除） */
     @Excel(name = "删除状态", readConverterExp = "0=存在,1=删除")
     private String delFlag;
 

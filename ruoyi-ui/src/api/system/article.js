@@ -21,11 +21,11 @@ export function addArticle(data) {
   })
 }
 
+
 //删除文章
-export function deleteArticle(data) {
+export function deleteArticle(articleId) {
   return request({
-    url: '/article/manage/delete',
-    method: 'post',
-    data: data
+    url: '/article/manage/' + articleId,
+    method: 'delete',
   })
 }
