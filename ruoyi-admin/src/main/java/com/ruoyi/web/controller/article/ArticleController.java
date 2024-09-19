@@ -22,6 +22,7 @@ import java.util.List;
 public class ArticleController extends BaseController {
 
 
+
     @Autowired
     private ArticleService articleService;
 
@@ -54,13 +55,37 @@ public class ArticleController extends BaseController {
     @PostMapping("/add")
     public AjaxResult list(@Validated @RequestBody Article article)
     {
-        List<Article> articles = articleService.selectArticle(article);
+        List<Article> articles = articleService.selectArticleByTitle(article);
         if (articles!=null && articles.size()>0) {
             return error("新增失败，该文章已存在");
         }
         return toAjax(articleService.insertArticle(article));
     }
 
+
+    @PreAuthorize("@ss.hasPermi('article:manage:edit')")
+    @Log(title = "文章管理-文章修改", businessType = BusinessType.UPDATE)
+    @PutMapping
+    public AjaxResult edit(@Validated @RequestBody Article article)
+    {
+
+        List<Article> articles = articleService.selectArticleByTitle(article);
+        if (articles!=null && articles.size()>0) {
+            return error("修改失败，该文章标题已存在");
+        }
+        return toAjax(articleService.updateArticle(article));
+    }
+
+    /**
+     * 状态修改
+     */
+    @PreAuthorize("@ss.hasPermi('article:manage:edit')")
+    @Log(title = "文章管理-文章状态修改", businessType = BusinessType.UPDATE)
+    @PutMapping("/changeStatus")
+    public AjaxResult changeStatus(@RequestBody Article article)
+    {
+        return toAjax(articleService.updateArticleStatus(article));
+    }
 
 
     /**

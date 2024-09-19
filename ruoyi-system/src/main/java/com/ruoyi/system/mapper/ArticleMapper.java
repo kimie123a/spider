@@ -8,7 +8,7 @@ public interface ArticleMapper {
 
     List<Article> selectArticleList(Article article);
 
-    List<Article> selectArticle(Article article);
+    List<Article> selectArticleByTitle(Article article);
 
     Article selectArticleById(Long articleId);
 
@@ -17,6 +17,14 @@ public interface ArticleMapper {
     public int deleteArticleById(Long articleId);
 
     public int deleteArticleByIds(Long[] articleIds);
+
+    /**
+     * 修改文章信息
+     *
+     * @param article 用户信息
+     * @return 结果
+     */
+    public int updateArticle(Article article);
 
 
 }
