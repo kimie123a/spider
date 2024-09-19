@@ -37,6 +37,17 @@ public class ArticleController extends BaseController {
     }
 
 
+    /**
+     * 根据文章编号获取详细信息
+     */
+    @PreAuthorize("@ss.hasPermi('article:manage:query')")
+    @GetMapping(value = "/{articleId}")
+    public AjaxResult getInfo(@PathVariable Long articleId)
+    {
+        Article s = articleService.selectArticleById(articleId);
+        return success(s);
+    }
+
 
     @PreAuthorize("@ss.hasPermi('article:manage:add')")
     @Log(title = "文章管理-文章新增", businessType = BusinessType.INSERT)

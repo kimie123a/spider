@@ -10,6 +10,8 @@ public interface ArticleService {
 //    文章列表
     public List<Article> selectArticleList(Article article);
 
+//    查询文章 通过文章ID
+    public Article selectArticleById(Long articleId);
 
 //    查询文章
     public List<Article> selectArticle(Article article);
@@ -33,4 +35,7 @@ public interface ArticleService {
      * @return 结果
      */
     public int deleteArticleByIds(Long[] articleIds);
+
+
+
 }

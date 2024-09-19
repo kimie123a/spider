@@ -24,6 +24,12 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    public Article selectArticleById(Long articleId) {
+        Article s = articleMapper.selectArticleById(articleId);
+        return s;
+    }
+
+    @Override
     public List<Article> selectArticle(Article article) {
         List<Article> articles = articleMapper.selectArticle(article);
         return articles;

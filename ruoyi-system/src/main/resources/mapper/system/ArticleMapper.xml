@@ -22,6 +22,11 @@
         where del_flag = '0'
     </select>
 
+    <select id="selectArticleById" parameterType="Long" resultMap="ArticleResult">
+        select art_id,art_title,art_description,art_content,status,del_flag,create_time,update_time from article
+        where art_id=#{articleId}
+    </select>
+
     <select id="selectArticle" parameterType="Article" resultMap="ArticleResult">
         select art_id,art_title,art_description,art_content,status,del_flag,create_time,update_time from article
         where art_title=#{artTitle}

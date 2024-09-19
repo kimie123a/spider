@@ -244,7 +244,7 @@
 </template>
 
 <script>
-import {addArticle, deleteArticle, getarticleList} from "@/api/system/article";
+import {addArticle, deleteArticle, getarticleList,getarticle} from "@/api/system/article";
 import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 import {addUser, delUser, getUser, updateUser} from "@/api/system/user";
 import Treeselect from "@riophae/vue-treeselect";
@@ -486,10 +486,19 @@ export default {
     handleEdit(index, row) {
       // console.log(index, row);
     },
-    handleUpdate(index, row){
-      console.log(index, row);
+    /** 修改按钮操作 */
+    handleUpdate(row) {
+      this.reset();
+      const articleId = row.articleId || this.ids;
+      getarticle(articleId).then(response => {
+        this.form = response.data;
+        this.open = true;
+        this.title = "修改文章";
+        // this.form.password = "";
+      });
     },
-    // 删除文章
+
+    /** 删除按钮操作 */
     handleDelete(row) {
       const articleIds = row.articleId || this.ids;
       this.$modal.confirm('是否确认删除用户编号为"' + articleIds + '"的数据项？').then(function() {
