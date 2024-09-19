@@ -14,7 +14,6 @@ export function getarticleList(query) {
 
 //新增文章
 export function addArticle(data) {
-  alert(1)
   return request({
     url: '/article/manage/add',
     method: 'post',

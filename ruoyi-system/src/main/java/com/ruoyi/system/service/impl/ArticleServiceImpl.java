@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
@@ -32,7 +33,10 @@ public class ArticleServiceImpl implements ArticleService {
     public int insertArticle(Article article) {
         article.setCreateTime(PjtConfig.getDate());
         article.setUpdateTime(PjtConfig.getDate());
-        article.setStatus(PjtConfig.getOpen());
+        if (article.getStatus()==null) {
+            article.setStatus(PjtConfig.getZero());
+        }
+        article.setDelFlag(PjtConfig.getZero());
         int rows = articleMapper.insertArticle(article);
         return rows;
     }
