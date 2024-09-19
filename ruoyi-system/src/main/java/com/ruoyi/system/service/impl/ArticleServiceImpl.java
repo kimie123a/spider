@@ -33,7 +33,7 @@ public class ArticleServiceImpl implements ArticleService {
     public int insertArticle(Article article) {
         article.setCreateTime(PjtConfig.getDate());
         article.setUpdateTime(PjtConfig.getDate());
-        if (article.getStatus()==null||article.getStatus().isEmpty()) {
+        if (article.getStatus().isEmpty()||article.getStatus()==null) {
             article.setStatus(PjtConfig.getZero());
         }
         article.setDelFlag(PjtConfig.getZero());
